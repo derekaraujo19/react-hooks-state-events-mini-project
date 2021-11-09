@@ -21,6 +21,17 @@ function App() {
     setTaskState(updatedTaskList)
 
   }
+
+  function handleDelete(currentTask) {
+    const filteredTasks = taskState.filter(task => {
+      return currentTask !== task;
+    })
+
+    // console.log(task)
+    // console.log(currentTask)
+    setTaskState(filteredTasks);
+  }
+
   // console.log(taskState)
   const itemsToDisplay = taskState.filter(task => {
     if (catSelected === 'All') return true;
@@ -32,7 +43,7 @@ function App() {
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} handleCatClick={handleCatClick} catSelected={catSelected}/>
       <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit}/>
-      <TaskList tasks={itemsToDisplay} setTasks={setTaskState} />
+      <TaskList tasks={itemsToDisplay} handleDelete={handleDelete} />
     </div>
   );
 }
